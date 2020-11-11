@@ -10,12 +10,19 @@ import { User } from '../user.class';
 export class UserListComponent implements OnInit {
 
   users: User[] = [];
-  
+
   constructor(
     private usersvc: UserService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
+    this.usersvc.list().subscribe(
+      res => { console.log(res); 
+      this.users = res as User[];
+    },
+      err => { console.error(err); }
+    );
   }
 
 }
